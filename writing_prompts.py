@@ -102,15 +102,13 @@ Valid listings: controversial, best, hot, new, random, rising, top
 Limit is the amount of posts you want. Any positive int > 0 will do.
 Valid timeframes: hour, day, week, month, year, all
 
-e.g. "{} top 25 week" this will print out a random writing prompt out
-of the top rated 25 posts this week.
+e.g. "{} top 25 week" this would print out a random writing prompt out of the top rated 25 posts this week.
 """.format(argv[0]))
-    
 
 
 if __name__ == "__main__":
     # Code
-    if 'help' in argv or 'h' in argv:
+    if 'help' in argv or 'h' in argv or len(argv) < 4:
         wp_help()
 
     # [0] is filename
