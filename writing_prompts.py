@@ -107,7 +107,7 @@ e.g. "{} top 25 week" this would print out a random writing prompt out of the to
 
 
 if __name__ == "__main__":
-    # Code
+    # TODO: Add a function that updates the tmp file with the same parameters
     try:
         if 'help' in argv or 'h' in argv or (len(argv) > 1 and len(argv) < 4):
             wp_help()
