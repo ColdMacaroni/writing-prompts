@@ -1,7 +1,8 @@
 #!/bin/python
 # Prints a random writing prompt from r/writingprompts
-# Takes the top 100 of today
-# TODO: Add options to select from
+# Takes the top 100 of today by default
+
+# TODO: Take args for the function
 
 # Sample api link
 # https://old.reddit.com/r/WritingPrompts/top.json?sort=top&t=day&count=100
