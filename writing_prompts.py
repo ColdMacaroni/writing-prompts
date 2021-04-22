@@ -108,16 +108,23 @@ e.g. "{} top 25 week" this would print out a random writing prompt out of the to
 
 if __name__ == "__main__":
     # Code
-    if 'help' in argv or 'h' in argv or len(argv) < 4:
-        wp_help()
-
-    # [0] is filename
-    elif len(argv) > 3:
-        try:
-            print(get_prompt(argv[1], argv[2], argv[3]))
-
-        except:
+    try:
+        if 'help' in argv or 'h' in argv or (len(argv) > 1 and len(argv) < 4):
             wp_help()
 
-    else:
-        print(get_prompt('top', '100', 'day'))
+        # [0] is filename
+        elif len(argv) > 3:
+            print(get_prompt(argv[1], argv[2], argv[3]))
+
+        else:
+            with open(temp_file(), 'r') as txt:
+                # Get first line
+                arguments = txt.readline()
+                arguments = arguments.replace('\n', '')
+
+                arguments = arguments.split(' ')
+                print(get_prompt(*arguments))
+
+    except:
+        wp_help()
+
