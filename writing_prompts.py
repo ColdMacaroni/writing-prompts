@@ -9,7 +9,7 @@
 
 from sys import argv
 from random import choice
-import requests
+from requests import get
 
 
 def get_reddit(subreddit,listing,limit,timeframe):
@@ -23,7 +23,7 @@ def get_reddit(subreddit,listing,limit,timeframe):
     try:
         base_url = f'https://www.reddit.com/r/{subreddit}/{listing}.json?limit={limit}&t={timeframe}'
 
-        request = requests.get(base_url, headers = {'User-agent': 'writingprompts-yank'})
+        request = get(base_url, headers = {'User-agent': 'writingprompts-yank'})
 
     except:
         print('An Error Occured')
