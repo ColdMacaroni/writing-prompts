@@ -6,7 +6,7 @@
 # Sample api link
 # https://old.reddit.com/r/WritingPrompts/top.json?sort=top&t=day&count=100
 
-import random
+from random import choice
 import requests
 
 
@@ -47,23 +47,48 @@ def process_prompts(listing, limit, timeframe):
     return prompts
 
 
-def get_prompt(listing, limit, timeframe):
+def write_wp_temp(listing, limit, timeframe, back=False):
+    prompts = process_prompts(listing, limit, timeframe)
 
-    wp_tmp_file = '/tmp/writingprompts.txt'
-    try:
-        # Try to open the temp file with prompts
-        with open(wp_tmp_file, 'r') as txt:
-            prompts = txt.readlines()
+    with open(temp_file(), 'w+') as txt:
+        # Add current details
+        txt.write(' '.join([listing, limit, timeframe]))
+        txt.write('\n')
 
-    except:
-        with open(wp_tmp_file, 'w+') as txt:
-            prompts = process_prompts(listing, limit, timeframe)
-
-            # Add current details
-            txt.write(' '.join(listing, limit, timeframe))
+        for prompt in prompts:
+            txt.write(prompt)
             txt.write('\n')
 
+    if back:
+        return prompts
 
+
+def temp_file():
+    return '/tmp/writingprompts.txt'
+
+
+def get_prompt(listing, limit, timeframe):
+    try:
+        raise Exception()
+        # Try to open the temp file with prompts
+        with open(temp_file(), 'r') as txt:
+            identifier, *prompts = txt.readlines()
+
+    except FileNotFoundError:
+        identifier, *prompts = write_wp_temp(listing,
+                                             limit,
+                                             timeframe,
+                                             back=True)
+
+    # Compare first line and call write_wp if they arent the same
+    if identifier != ' '.join([listing, limit, timeframe]):
+        identifier, *prompts = write_wp_temp(listing,
+                                             limit,
+                                             timeframe,
+                                             back=True)
+
+    # Return a random prompt
+    return choice(prompts)
 
 
 if __name__ == "__main__":
