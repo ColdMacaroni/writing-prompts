@@ -42,7 +42,8 @@ def process_prompts(listing, limit, timeframe):
         post = child['data']
 
         if post['link_flair_text'] in acceptable_flairs:
-            prompts.append(post['title'].replace('[WP] ', ''))
+            # Remove tag. e.g. "[WP] "
+            prompts.append(post['title'][5:])
 
     return prompts
 
@@ -80,6 +81,7 @@ def get_prompt(listing, limit, timeframe):
                                              back=True)
 
     # Compare first line and call write_wp if they arent the same
+    # print(identifier)
     if identifier != ' '.join([listing, limit, timeframe]):
         identifier, *prompts = write_wp_temp(listing,
                                              limit,
