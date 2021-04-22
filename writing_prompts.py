@@ -7,6 +7,7 @@
 # Sample api link
 # https://old.reddit.com/r/WritingPrompts/top.json?sort=top&t=day&count=100
 
+from sys import argv
 from random import choice
 import requests
 
@@ -93,6 +94,23 @@ def get_prompt(listing, limit, timeframe):
     return choice(prompts).replace('\n', '')
 
 
+def wp_help():
+    # TODO
+    pass
+
+
 if __name__ == "__main__":
     # Code
-    print(get_prompt('top', '100', 'day'))
+    if 'help' in argv or 'h' in argv:
+        wp_help()
+
+    # [0] is filename
+    elif len(argv) > 3:
+        try:
+            print(get_prompt(argv[1], argv[2], argv[3]))
+
+        except:
+            wp_help()
+
+    else:
+        print(get_prompt('top', '100', 'day'))
