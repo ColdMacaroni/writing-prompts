@@ -117,6 +117,7 @@ if __name__ == "__main__":
             print(get_prompt(argv[1], argv[2], argv[3]))
 
         else:
+            # Call with last arguments
             with open(temp_file(), 'r') as txt:
                 # Get first line
                 arguments = txt.readline()
