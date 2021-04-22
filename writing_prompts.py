@@ -27,14 +27,18 @@ def get_reddit(subreddit,listing,limit,timeframe):
     return request.json()
 
 
-def process_prompts(listing, limit, timeframe)
+def process_prompts(listing, limit, timeframe):
     posts = get_reddit('writingprompts',listing,limit,timeframe)
-
     prompts = []
 
+    # link_flair_text
+    flair = 'Writing Prompt'
     # Loop through the posts
+    for child in posts['data']['children']:
+        print(child)
+        print()
         # Add 'title' to prompts if flair is 'Writing Prompt'. Removing [WP] from it
 
 if __name__ == "__main__":
     # Code
-    pass
+    print(process_prompts('top', '100', 'day'))
