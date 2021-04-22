@@ -43,7 +43,7 @@ def process_prompts(listing, limit, timeframe):
 
         if post['link_flair_text'] in acceptable_flairs:
             # Remove tag. e.g. "[WP] "
-            prompts.append(post['title'][5:])
+            prompts.append(post['link_flair_text'] + ': ' + post['title'][5:])
 
     return prompts
 
@@ -81,15 +81,15 @@ def get_prompt(listing, limit, timeframe):
                                              back=True)
 
     # Compare first line and call write_wp if they arent the same
-    # print(identifier)
-    if identifier != ' '.join([listing, limit, timeframe]):
+    # identifier comes with \n if read from file
+    if identifier.replace('\n', '') != ' '.join([listing, limit, timeframe]):
         identifier, *prompts = write_wp_temp(listing,
                                              limit,
                                              timeframe,
                                              back=True)
 
-    # Return a random prompt
-    return choice(prompts)
+    # Return a random prompt. Getting rid of newline
+    return choice(prompts).replace('\n', '')
 
 
 if __name__ == "__main__":
