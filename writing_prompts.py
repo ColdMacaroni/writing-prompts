@@ -69,7 +69,6 @@ def temp_file():
 
 def get_prompt(listing, limit, timeframe):
     try:
-        raise Exception()
         # Try to open the temp file with prompts
         with open(temp_file(), 'r') as txt:
             identifier, *prompts = txt.readlines()
@@ -93,4 +92,4 @@ def get_prompt(listing, limit, timeframe):
 
 if __name__ == "__main__":
     # Code
-    print(len(process_prompts('top', '100', 'day')))
+    print(get_prompt('top', '100', 'day'))
