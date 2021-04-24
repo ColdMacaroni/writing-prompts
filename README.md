@@ -16,6 +16,7 @@ Here's a one liner to do this. `/tmp/writingprompts.txt` is the default path. Yo
 
 `wp_args=$(head -n 1 /tmp/writingprompts.txt); rm /tmp/writingprompts.txt && sh -c "writing-prompt $wp_args"`
 
+
 Or run `writing-prompt` with different arguments. If they are the same as the ones defined in the file (first line), it will pick one from there.
 
 An update function/arguments will be added soon
