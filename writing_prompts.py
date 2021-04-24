@@ -37,7 +37,9 @@ def process_prompts(listing, limit, timeframe):
 
     # This is to avoid things like mod posts
     # link_flair_text
-    acceptable_flairs = ['Writing Prompt', 'Established Universe']
+    acceptable_flairs = ['Writing Prompt',
+                         'Established Universe',
+                         'Simple Prompt']
 
     # Loop through the posts
     for child in posts['data']['children']:
