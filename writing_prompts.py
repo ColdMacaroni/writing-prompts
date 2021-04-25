@@ -114,21 +114,31 @@ def update():
     return prompt
 
 def wp_help():
-    print("""Invalid arguments.
+    print("""
 You must provide 3 arguments: listing, limit, timeframe. (In that order)
 
 Valid listings: controversial, best, hot, new, random, rising, top
 Limit is the amount of posts you want. Any positive int > 0 will do.
 Valid timeframes: hour, day, week, month, year, all
 
-e.g. "{} top 25 week" this would print out a random writing prompt out of the top rated 25 posts this week.
+e.g. "{0} top 25 week" this would print out a random writing prompt out of the top rated 25 posts this week.
+
+Access this help with "{0} help"
+Update the prompts with the same arguments with "{0} update"
 """.format(argv[0]))
 
 
 if __name__ == "__main__":
     # TODO: Add a function that updates the tmp file with the same parameters
     try:
-        if 'help' in argv or 'h' in argv or (len(argv) > 1 and len(argv) < 4):
+        if 'help' in argv or 'h' in argv:
+            wp_help()
+
+        elif 'update' in argv or 'u' in argv:
+            print(update())
+
+        elif len(argv) > 1 and len(argv) < 4):
+            print("Invalid arguments.")
             wp_help()
 
         # [0] is filename
@@ -146,5 +156,6 @@ if __name__ == "__main__":
                 print(get_prompt(*arguments))
 
     except:
+        print('Something has gone wrong.')
         wp_help()
 
