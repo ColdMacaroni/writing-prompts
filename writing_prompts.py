@@ -76,7 +76,7 @@ def get_prompt(listing, limit, timeframe):
         with open(temp_file(), 'r') as txt:
             identifier, *prompts = txt.readlines()
 
-    except FileNotFoundError:
+    except:
         identifier, *prompts = write_wp_temp(listing,
                                              limit,
                                              timeframe,
@@ -93,6 +93,25 @@ def get_prompt(listing, limit, timeframe):
     # Return a random prompt. Getting rid of newline
     return choice(prompts).replace('\n', '')
 
+
+def update():
+    """
+    Update the current list
+    """
+    # Get arguments
+    with open(temp_file(), 'r') as txt:
+        identifier = txt.readline().replace('\n', '')
+
+    # Empty out file
+    with open(temp_file(), 'w') as txt:
+        txt.write('')
+
+    # Turn into unpackable list
+    arguments = identifier.split(' ')
+
+    # proceed with get_prompt as normal
+    prompt = get_prompt(*arguments)
+    return prompt
 
 def wp_help():
     print("""Invalid arguments.
